@@ -38,52 +38,10 @@ protected $base_Field;
     }
 
 
-    
-    public static function getProductCatagory($code){
-
-        $model=new Model(1);
-        $return= $model->where('UniqId',$code)->first();
-
-
-        if($return != null  ){
-
-            return (array)$return->toArray();
-        }
-        
-        return (array)"Category Not Found";
-
-
-
-
-
-    }
-
-
-
-    public static function getProductbyId ($id){
-
-        $model=new Model(0);
-        if($model->where('UniqId',$id)->first() == null)return false;
-        if($model->where('UniqId',$id)->first() != null)$model=$model->where('UniqId',$id)->first()->toArray();
-        
-        return $model;
-
-    }
 
 
     public static function getProductCode(){
             
-        // $model=new Model(0);
-
-        // return $model->pluck('ProductName','UniqId')->toArray();        
-
-
-
-
-        // $data=[];
-        
-        // return $data;
-
 
         $model=new Model(0);
         $data=$model->pluck('ProductTypeCode','UniqId')->toArray();
@@ -93,7 +51,7 @@ protected $base_Field;
 
         foreach ($data2 as $key => $value) {
            
-                   $return[$key]=  $value.",".self::getProductCatagory($data[$key])['ProductTypeName'];
+                   $return[$key]=  $value;
                 }        
                 return $return;
    

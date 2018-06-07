@@ -1,5 +1,13 @@
-<div class="form-group col-lg-6">
+
 <?php
+
+	if(array_key_exists('ClassData', $data)){
+	    	
+		if(array_key_exists('form-class-div',$data['ClassData']))$input_class=$data['ClassData']['form-class-div'];
+
+	
+	}
+
 
 //dd($data);
 if(!array_key_exists('vName', $data))$data['vName']=$data['lable'];
@@ -10,12 +18,14 @@ if(!array_key_exists('vName', $data))$data['vName']=$data['lable'];
 
 ?>
 
+<div class="form-group  {{ $input_class or 'col-lg-6' }}">
+
 	@if(array_key_exists('link',$data))
 
 
 	<?php
 
-	
+
 
 	$class="\\B\\".$data['link']['mod']."\\Model";
 
@@ -31,6 +41,7 @@ if(!array_key_exists('vName', $data))$data['vName']=$data['lable'];
     	$data['funName']=$data['name'];
 
     }
+
 	//$data['vName']=$data['name'];
     if(array_key_exists('funName', $data))
     {

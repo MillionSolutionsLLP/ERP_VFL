@@ -248,7 +248,7 @@ class Builder{
 		}
 		
 		$data2=[
-			'form-class-div'=>"col-lg-3",
+			'form-class-div'=>"col-lg-2",
 			//'form-class-id'=>$id
 
 		];
@@ -260,6 +260,8 @@ class Builder{
 		if(array_key_exists('data', $data))
 
 		{
+
+				//dd($data);
 				$cdata=$data['data'];
 				if(is_array($cdata)){
 

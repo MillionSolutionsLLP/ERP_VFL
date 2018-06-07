@@ -28,6 +28,39 @@ public static $routes=[
 						'method'=>'index',
 						'type'=>'get',
 						],
+
+							[
+						'name'=>'SM.Data',
+						'route'=>'/data',
+						'method'=>'indexData',
+						'type'=>'get',
+						],
+
+						[
+						'name'=>'SM.Data',
+						'route'=>'/bill/add',
+						'method'=>'addBill',
+						'type'=>'get',
+						],
+
+
+						[
+						'name'=>'SM.Data',
+						'route'=>'/bill/admin/add',
+						'method'=>'addBillforAdmin',
+						'type'=>'get',
+						],
+
+
+
+
+
+						[
+						'name'=>'SM.Data',
+						'route'=>'/bill/add',
+						'method'=>'addBillPost',
+						'type'=>'post',
+						],
 					];
 
 public static $tableNo="0";
@@ -43,15 +76,23 @@ public static $allOnSameconnection=true;
 ////////////////////////////////////////////////////////////////////////
 // Sub Module Start
 ////////////////////////////////////////////////////////////////////////
-public static $table="SM";
+public static $table1="SM_Booking_";
 
-public static $connection1 ="IM_Data";
+public static $connection1 ="SM_Data";
 
 public static $tableStatus1=false;
 
-public static $field=[
-['name'=>'UniqId','type'=>'string','input'=>'auto','value'=>'genUniqID','default'=>'genUniqID',],
-['name'=>'Status','type'=>'boolean','input'=>'radio','value'=>'status','default'=>'status'],
+public static $field1=[
+
+
+['name'=>'UniqId','type'=>'string','input'=>'auto','callback'=>'genUniqID',],
+
+
+['name'=>'Date','type'=>'string','input'=>'date',  ],
+
+
+['name'=>'RecipientName','type'=>'string','input'=>'text',  ],
+['name'=>'RecipientAddress','type'=>'string','input'=>'text',  ],
 
 ];
 
@@ -60,6 +101,84 @@ public static $field=[
 ////////////////////////////////////////////////////////////////////////
 // Sub Module End
 ////////////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+// Sub Module Start
+////////////////////////////////////////////////////////////////////////
+
+public static $table2="SM_Booking_";
+
+public static $connection2 ="SM_Data";
+
+public static $tableStatus2=false;
+
+public static $field2=[
+
+['name'=>'ProductCode','type'=>'string','input'=>'text', 'link'=>'PM:0' ],
+['name'=>'ProductQuantity','type'=>'string','input'=>'number',  ],
+['name'=>'ProductDate','type'=>'string','input'=>'date',  ],
+
+];
+
+
+////////////////////////////////////////////////////////////////////////
+// Sub Module End
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+// Sub Module Start
+////////////////////////////////////////////////////////////////////////
+
+public static $table3="SM_Booking_";
+
+public static $connection3 ="SM_Data";
+
+public static $tableStatus3=false;
+
+public static $field3=[
+
+['name'=>'ProductDate','type'=>'string','input'=>'date',  ],
+['name'=>'TeaQuantity','type'=>'string','input'=>'number',  ],
+['name'=>'CoffeeQuantity','type'=>'string','input'=>'number',  ],
+
+
+];
+
+
+////////////////////////////////////////////////////////////////////////
+// Sub Module End
+////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////
+// Sub Module Start
+////////////////////////////////////////////////////////////////////////
+public static $table4="SM_Booking_";
+
+public static $connection4="SM_Data";
+
+public static $tableStatus4=false;
+
+public static $field4=[
+
+
+['name'=>'UniqId','type'=>'string','input'=>'auto','callback'=>'genUniqID',],
+
+
+['name'=>'Date','type'=>'string','input'=>'date',  ],
+];
+
+////////////////////////////////////////////////////////////////////////
+// Sub Module End
+////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -101,17 +220,30 @@ public static function status(){
 public static  function genFormData($edit=false,$data=[],$id=false){
 	
 	$array=[];
+
 	if($edit and count($data)>0){
-
-		$model=new Model($id);
 		
-		//dd($model);
+		$field=Self::getField($id);
+		$c=0;
 
+		foreach ($field  as $key => $value) {
+			if( array_key_exists($value['name'], $data) )$c=$c+1;
+		}
+
+		if(count($data)==$c){
+
+			$v=$data;
+		}else{
+
+				$model=new Model($id);
 		$v=$model->where(array_keys($data)[0],$data[array_keys($data)[0]])->first();
-
 		if($v!=null){
 			$v=$v->toArray();
 		}
+
+		}
+
+	
 		//dd($v);
 
 		if($id){

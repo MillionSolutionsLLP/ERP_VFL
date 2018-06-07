@@ -10,10 +10,10 @@
 
 
 
-         <div class="btn-group" role="group" aria-label="...">
-          <span class="btn btn-default collapsed " role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-archive" aria-hidden="true"></i> Company Master </span>
+         <div class="btn-group  ms-btn-full-width" role="group" aria-label="...">
+          <span class="btn btn-default collapsed  ms-btn-full-width-main" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-archive" aria-hidden="true"></i> Company Master </span>
 
-           <span class="pull-right ms-mod-btn btn btn-default" ms-live-link="{{ action("\B\MAS\Controller@indexData") }}">
+           <span class="pull-right ms-mod-btn btn btn-default  ms-btn-full-width-side" ms-live-link="{{ action("\B\MAS\Controller@indexData") }}">
             
             <i class="fa fa-home" aria-hidden="true"></i>
 
