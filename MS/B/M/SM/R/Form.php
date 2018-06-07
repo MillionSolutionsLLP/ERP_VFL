@@ -1,11 +1,11 @@
 <?php
 
-namespace B\PM\R;
+namespace B\SM\R;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 
-class Product extends FormRequest
+class Form extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,16 +26,14 @@ class Product extends FormRequest
     {
          return [
             'UniqId'=>"required",
-            'ProductName'=>"required",
-            'ProductPrice'=>"required",
-
+     
           
           
             ];
 
     }
 
-                protected function formatErrors(Validator $validator)
+    protected function formatErrors(Validator $validator)
 {
     
     

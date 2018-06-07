@@ -1,5 +1,5 @@
 <?php
-namespace B\PM;
+namespace B\SM;
 
 
 use \Illuminate\Http\Request;
@@ -8,8 +8,7 @@ use \Illuminate\Http\Request;
 
 
 
-class Base
-{
+class Base{
 
 
 ///////////////////////////////////////////////////////////
@@ -18,116 +17,49 @@ class Base
 ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 
-public static $controller="\B\PM\Controller";
-public static $model="\B\M\PM\Model";
-
-
-
-
-
-
-
-
+public static $controller="\B\SM\Controller";
+public static $model="\B\M\SM\Model";
 
 
 public static $routes=[
 						[
-						'name'=>'PM.Data',
+						'name'=>'SM.Data',
 						'route'=>'/',
 						'method'=>'index',
 						'type'=>'get',
 						],
-
-						[
-						'name'=>'PM.Data',
-						'route'=>'/data',
-						'method'=>'indexData',
-						'type'=>'get',
-						],
-
-
-
-
-						/////////
-
-						[
-						'name'=>'PM.Product',
-						'route'=>'/product/add',
-						'method'=>'addProduct',
-						'type'=>'get',
-						],
-
-						[
-						'name'=>'PM.Product',
-						'route'=>'/product/add',
-						'method'=>'addProductPost',
-						'type'=>'post',
-						],
-
-
-						
-						[
-						'name'=>'PM.Product',
-						'route'=>'/product/edit/{UniqId}',
-						'method'=>'editProduct',
-						'type'=>'get',
-						],
-
-						[
-						'name'=>'PM.Product',
-						'route'=>'/product/edit',
-						'method'=>'editProductPost',
-						'type'=>'post',
-						],
-
-						[
-						'name'=>'PM.Product',
-						'route'=>'/product/delete/{UniqId}',
-						'method'=>'deleteProduct',
-						'type'=>'get',
-						],
-						///////////////
-
-
 					];
 
+public static $tableNo="0";
 
-public static $tableNo="2";
 
-//public static $connection ="MSDBC";
+
+public static $connection ="MSDBC";
 
 public static $allOnSameconnection=true;
 
 
 
 ////////////////////////////////////////////////////////////////////////
-// Product Module Start
+// Sub Module Start
 ////////////////////////////////////////////////////////////////////////
+public static $table="SM";
 
-public static $table="Master_Product";
+public static $connection1 ="IM_Data";
 
-
-public static $connection ="PM_Master";
-
-
-public static $tableStatus=True;
+public static $tableStatus1=false;
 
 public static $field=[
-['name'=>'UniqId','type'=>'string','input'=>'auto','callback'=>'genUniqID',],
-
-['name'=>'ProductName','type'=>'string','input'=>'text'],
-['name'=>'ProductPrice','type'=>'string','input'=>'text'],
-
+['name'=>'UniqId','type'=>'string','input'=>'auto','value'=>'genUniqID','default'=>'genUniqID',],
 ['name'=>'Status','type'=>'boolean','input'=>'radio','value'=>'status','default'=>'status'],
 
 ];
 
 
-////////////////////////////////////////////////////////////////////////
-// Product Module End
-////////////////////////////////////////////////////////////////////////
 
-
+////////////////////////////////////////////////////////////////////////
+// Sub Module End
+////////////////////////////////////////////////////////////////////////
 
 
 
@@ -153,9 +85,6 @@ public static function status(){
 
 
 
-public static function makeProductId(){
-
-}
 
 
 
@@ -175,24 +104,21 @@ public static  function genFormData($edit=false,$data=[],$id=false){
 	if($edit and count($data)>0){
 
 		$model=new Model($id);
-			
-	
-
+		
+		//dd($model);
 
 		$v=$model->where(array_keys($data)[0],$data[array_keys($data)[0]])->first();
 
 		if($v!=null){
 			$v=$v->toArray();
-		}else{
-			$v=$data;
 		}
-		
+		//dd($v);
 
 		if($id){
 		
 				$field="field".$id;
 				foreach (self::$$field as $value) {
-				//dd($v);
+				
 				//var_dump($value);
 				if(array_key_exists($value['name'], $v)){
 
@@ -482,16 +408,13 @@ public static function genFieldData($data){
 			];
 			if (array_key_exists('link', $data)) {
 				$array['link']=[
-				'mod'=>explode(':', $data['link'])[0] ,	
-			];
-			
-			
-		//	dd($array);
 
+				'mod'=>explode(':', $data['link'])[0] ,
 			
+
+			];
 			}
-			if(array_key_exists('vName', $data))$array['vName']=$data['vName'];
-			if(array_key_exists('editLock', $data))$array['editLock']=$data['editLock'];
+
 			break;
 
 		case 'email':
@@ -502,7 +425,6 @@ public static function genFieldData($data){
 			'value'=>(array_key_exists('callback', $data) ? self::$data['callback']() : null),
 			'default'=>(array_key_exists('default', $data) ? self::$data['default']() : null),
 			];
-			if(array_key_exists('vName', $data))$array['vName']=$data['vName'];
 			break;
 
 		case 'number':
@@ -512,11 +434,8 @@ public static function genFieldData($data){
 			'type'=>$data['input'],
 			'value'=>(array_key_exists('callback', $data) ? self::$data['callback']() : null),
 			];
-			if(array_key_exists('vName', $data))$array['vName']=$data['vName'];
 			break;
 		case 'option':
-
-
 			$array=[
 			'lable'=>ucfirst($data['name']),
 			'name'=>$data['name'],

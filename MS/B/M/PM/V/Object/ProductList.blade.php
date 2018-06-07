@@ -14,7 +14,7 @@
 	<tr>
 
 	<th colspan="1"> <strong> Product Name</strong> </th>
-    <th colspan="1"> <strong> Cat.</strong> </th>
+    <th colspan="1"> <strong> Price</strong> </th>
 	<th colspan="1"> <starong> Action</strong> </th>
 	
 </tr>
@@ -29,13 +29,13 @@
     	
 
     	<?php 
-        $cat=\B\PM\Model::getProductCatagory( $row['ProductTypeCode']);
 
-        $type[$row['ProductTypeCode']]=$cat;
+
+
 
         ?>
     	<td>{{ $row['ProductName'] }}</td>
-        <td>{{ $cat['ProductTypeName'] }}</td>
+        <td>{{ $row['ProductPrice'] }}</td>
 
     	<?php 
     	//action('/B/MAS/Controller@editTax', ['UniqId' => 1])

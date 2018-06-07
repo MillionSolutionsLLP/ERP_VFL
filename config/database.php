@@ -46,6 +46,25 @@ return [
         ],
 
 
+          'PM_Master' => [
+            'driver' => 'sqlite',
+            'database' => base_path('MS'.DIRECTORY_SEPARATOR.'DB'.DIRECTORY_SEPARATOR.'Master'.DIRECTORY_SEPARATOR.'PM_Master'),
+            'prefix' => '',
+        ],
+
+
+        'PM_Data' => [
+            'driver' => 'sqlite',
+            'database' => base_path('MS'.DIRECTORY_SEPARATOR.'DB'.DIRECTORY_SEPARATOR.'Master'.DIRECTORY_SEPARATOR.'PM_Data'),
+            'prefix' => '',
+        ],
+
+
+
+
+
+
+
         'IM_Master' => [
             'driver' => 'sqlite',
             'database' => base_path('MS'.DIRECTORY_SEPARATOR.'DB'.DIRECTORY_SEPARATOR.'Master'.DIRECTORY_SEPARATOR.'IM_Master'),

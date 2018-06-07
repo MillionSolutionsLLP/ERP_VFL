@@ -58,3 +58,4 @@ Route::prefix('IVR')->group(function () {
 
 
 Route::prefix('BM')->group(function () { \MS\Core\Helper\Comman::loadRoute('BM'); });
+Route::prefix('SM')->group(function () { \MS\Core\Helper\Comman::loadRoute('SM'); });
